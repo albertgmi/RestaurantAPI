@@ -11,6 +11,12 @@ namespace RestaurantAPI
 
         public void Seed(RestaurantDbContext dbContext)
         {
+            if (!dbContext.Roles.Any())
+            {
+                var roles = CreateRoles();
+                dbContext.Roles.AddRange(roles);
+                dbContext.SaveChanges();
+            }
             if (dbContext.Dishes.Any())
                 return;
 
@@ -84,6 +90,25 @@ namespace RestaurantAPI
                 });
             }
             return dishes;
+        }
+        public List<Role> CreateRoles()
+        {
+            var roles = new List<Role>()
+            {
+                new Role()
+                {
+                    Name = "User"
+                },
+                new Role()
+                {
+                    Name = "Manager"
+                },
+                new Role()
+                {
+                    Name = "Admin"
+                }
+            };
+            return roles;
         }
     }
 }
