@@ -67,15 +67,10 @@ app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<TimeRequestMiddleware>();
 
 app.UseAuthentication();
-
-app.UseHttpsRedirection();
-
-app.UseSwagger();
-
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestaurantAPI"));
-
 app.UseAuthorization();
-
+app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestaurantAPI"));
 app.MapControllers();
 
 using var scope = app.Services.CreateScope();
