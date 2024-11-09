@@ -4,6 +4,6 @@
     {
         public Guid RoleId { get; set; }
         public string Name { get; set; }
-        public User User { get; set; }
+        public List<User> Users { get; set; }
     }
 }

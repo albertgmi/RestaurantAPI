@@ -9,10 +9,38 @@ using System.Reflection;
 using RestaurantAPI.Services;
 using NLog.Web;
 using RestaurantAPI.Middleware;
+using Microsoft.AspNetCore.Identity;
+using FluentValidation;
+using RestaurantAPI.Models;
+using RestaurantAPI.Models.Validators;
+using FluentValidation.AspNetCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+var authenticationSettings = new AuthenticationSettings();
+builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "Bearer";
+    options.DefaultScheme = "Bearer";
+    options.DefaultChallengeScheme = "Bearer";
+
+}).AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidIssuer = authenticationSettings.JwtIssuer,
+        ValidAudience = authenticationSettings.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey))
+    };
+});
+
+builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IDishService, DishService>();
@@ -21,6 +49,8 @@ builder.Host.UseNLog();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<TimeRequestMiddleware>();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
 
 // Entity Framework stuff
 builder.Services.AddDbContext<RestaurantDbContext>(
@@ -35,6 +65,9 @@ var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<TimeRequestMiddleware>();
+
+app.UseAuthentication();
+
 app.UseHttpsRedirection();
 
 app.UseSwagger();

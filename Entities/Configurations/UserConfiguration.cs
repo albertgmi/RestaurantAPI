@@ -7,12 +7,12 @@ namespace RestaurantAPI.Entities.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(u=>u.Email)
+            builder.Property(u => u.Email)
                 .IsRequired();
 
             builder.HasOne(u => u.Role)
-                .WithOne(r => r.User)
-                .HasForeignKey<User>(fk => fk.RoleId);
+                .WithMany(r => r.Users)
+                .HasForeignKey(fk => fk.RoleId);
         }
     }
 }
