@@ -9,17 +9,23 @@ namespace RestaurantAPI.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IUserService _service;
-        public AccountController(IUserService service)
+        private readonly IUserService _userService;
+        public AccountController(IUserService userService)
         {
-            _service = service;
+            _userService = userService;
         }
 
         [HttpPost("register")]
         public ActionResult Register([FromBody] RegisterUserDto userDto)
         {
-            _service.RegisterUser(userDto);
+            _userService.RegisterUser(userDto);
             return Ok();
+        }
+        [HttpPost("login")]
+        public ActionResult Login([FromBody] UserLoginDto dto)
+        {
+            string token = _userService.GenerateJwt(dto);
+            return Ok(token);
         }
     }
 }
