@@ -14,8 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddTransient<IRestaurantService, RestaurantService>();
-builder.Services.AddTransient<IDishService, DishService>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+builder.Services.AddScoped<IDishService, DishService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Host.UseNLog();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<TimeRequestMiddleware>();
