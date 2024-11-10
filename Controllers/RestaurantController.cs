@@ -31,6 +31,7 @@ namespace RestaurantAPI.Controllers
             return NoContent();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult CreateRestaurant([FromBody] CreateRestaurantDto dto)
         {
             var restaurantId = _service.Create(dto);
@@ -38,6 +39,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "HasNationality")]
         public ActionResult<IEnumerable<RestaurantDto>> GetAll()
         {
             var restaurantsDtos = _service.GetAll();
