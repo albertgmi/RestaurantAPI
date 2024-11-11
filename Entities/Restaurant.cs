@@ -9,6 +9,8 @@
         public bool HasDelivery { get; set; }
         public string ContactEmail { get; set; }
         public string ContactNumber { get; set; }
+        public Guid? CreatedById { get; set; }
+        public User CreatedBy { get; set; }
 
         public Address Address { get; set; }
         public Guid AddressId { get; set; }
