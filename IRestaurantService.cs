@@ -6,7 +6,7 @@ namespace RestaurantAPI.Services
     public interface IRestaurantService
     {
         Guid Create(CreateRestaurantDto dto);
-        IEnumerable<RestaurantDto> GetAll(string searchPhrase);
+        PagedResult<RestaurantDto> GetAll(RestaurantQuery query);
         RestaurantDto GetById(string id);
         void Delete(string id);
         void Update(string id, UpdateRestaurantDto dto);
