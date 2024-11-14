@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using RestaurantAPI;
-using AutoMapper;
 using RestaurantAPI.Entities;
 using System.Text.Json.Serialization;
-using Bogus.DataSets;
-using System.Reflection;
 using NLog.Web;
 using RestaurantAPI.Middleware;
 using Microsoft.AspNetCore.Identity;
@@ -89,7 +86,10 @@ builder.Services.Configure<JsonOptions>(options =>
 });
 builder.Services.AddTransient<IRestaurantSeeder, RestaurantSeeder>();
 
+
 var app = builder.Build();
+
+app.UseStaticFiles();
 
 app.UseCors("FrontendClient");
 app.UseMiddleware<ErrorHandlingMiddleware>();
