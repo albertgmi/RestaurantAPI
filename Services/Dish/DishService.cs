@@ -5,7 +5,7 @@ using RestaurantAPI.Exceptions;
 using RestaurantAPI.Models;
 using System.Collections.Specialized;
 
-namespace RestaurantAPI.Services
+namespace RestaurantAPI.Services.Dish
 {
     public class DishService : IDishService
     {
@@ -35,7 +35,7 @@ namespace RestaurantAPI.Services
 
             var dish = restaurant
                 .Dishes
-                .FirstOrDefault(x=>x.Id==Guid.Parse(dishId));
+                .FirstOrDefault(x => x.Id == Guid.Parse(dishId));
             if (dish is null || dish.RestaurantId != restaurant.Id)
                 throw new NotFoundException("Dish not found");
             var dishDto = _mapper.Map<DishDto>(dish);
@@ -61,7 +61,7 @@ namespace RestaurantAPI.Services
             var restaurant = GetRestaurantAndDishesById(restaurantId);
             var dish = _context
                 .Dishes
-                .FirstOrDefault(x=>x.Id==Guid.Parse(dishId));
+                .FirstOrDefault(x => x.Id == Guid.Parse(dishId));
             if (dish == null)
                 throw new NotFoundException("Dish not found");
             _context.Remove(dish);

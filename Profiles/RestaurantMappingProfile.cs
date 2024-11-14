@@ -2,7 +2,7 @@
 using RestaurantAPI.Entities;
 using RestaurantAPI.Models;
 
-namespace RestaurantAPI
+namespace RestaurantAPI.Profiles
 {
     public class RestaurantMappingProfile : Profile
     {
@@ -16,9 +16,9 @@ namespace RestaurantAPI
             CreateMap<Dish, DishDto>();
 
             CreateMap<CreateRestaurantDto, Restaurant>()
-                .ForMember(r => r.Address, dto => dto.MapFrom(x => new Address ()
-                { City = x.City, Street = x.Street, PostalCode = x.PostalCode}));
-            
+                .ForMember(r => r.Address, dto => dto.MapFrom(x => new Address()
+                { City = x.City, Street = x.Street, PostalCode = x.PostalCode }));
+
             CreateMap<CreateDishDto, Dish>();
         }
     }

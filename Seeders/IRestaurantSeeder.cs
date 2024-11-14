@@ -1,6 +1,6 @@
 ﻿using RestaurantAPI.Entities;
 
-namespace RestaurantAPI
+namespace RestaurantAPI.Seeders
 {
     public interface IRestaurantSeeder
     {

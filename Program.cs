@@ -6,7 +6,6 @@ using RestaurantAPI.Entities;
 using System.Text.Json.Serialization;
 using Bogus.DataSets;
 using System.Reflection;
-using RestaurantAPI.Services;
 using NLog.Web;
 using RestaurantAPI.Middleware;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +17,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using RestaurantAPI.Authorization;
 using Microsoft.AspNetCore.Authorization;
+using RestaurantAPI.Services.Restaurant;
+using RestaurantAPI.Services.Dish;
+using RestaurantAPI.Services.UserFolder;
+using RestaurantAPI.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +69,16 @@ builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator
 builder.Services.AddScoped<IValidator<RestaurantQuery>, RestaurantQueryValidator>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendClient", policyBuilder =>
+    {
+        policyBuilder
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .WithOrigins(builder.Configuration["AllowedOrigins"]);
+    });
+});
 
 // Entity Framework stuff
 builder.Services.AddDbContext<RestaurantDbContext>(
@@ -78,6 +91,7 @@ builder.Services.AddTransient<IRestaurantSeeder, RestaurantSeeder>();
 
 var app = builder.Build();
 
+app.UseCors("FrontendClient");
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<TimeRequestMiddleware>();
 

@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace RestaurantAPI.Services
+namespace RestaurantAPI.Services.UserFolder
 {
     public class UserContextService : IUserContextService
     {

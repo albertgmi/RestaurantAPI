@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -6,9 +7,12 @@ using RestaurantAPI.Authorization;
 using RestaurantAPI.Entities;
 using RestaurantAPI.Exceptions;
 using RestaurantAPI.Models;
+using RestaurantAPI.Services.UserFolder;
+using RestaurantAPI.Services.Restaurant;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
-namespace RestaurantAPI.Services
+namespace RestaurantAPI.Services.Restaurant
 {
     public class RestaurantService : IRestaurantService
     {
@@ -49,8 +53,24 @@ namespace RestaurantAPI.Services
                 .Include(x => x.Address)
                 .Include(x => x.Dishes)
                 .Where(x => query.SearchPhrase == null
-                            || (x.Name.ToLower().Contains(query.SearchPhrase.ToLower())
-                            || x.Description.ToLower().Contains(query.SearchPhrase.ToLower())));
+                            || x.Name.ToLower().Contains(query.SearchPhrase.ToLower())
+                            || x.Description.ToLower().Contains(query.SearchPhrase.ToLower()));
+
+            if (!query.SortBy.IsNullOrEmpty())
+            {
+                var columnsSelector = new Dictionary<string, Expression<Func<Restaurant, object>>>
+                {
+                    {nameof(Restaurant.Name), x=>x.Name },
+                    {nameof(Restaurant.Description), x=>x.Description},
+                    {nameof(Restaurant.Category), x=>x.Category }
+                };
+
+                var selectedColumn = columnsSelector[query.SortBy];
+
+                baseQuery = query.SortDirection == SortDirection.ASC
+                    ? baseQuery.OrderBy(selectedColumn)
+                    : baseQuery.OrderByDescending(selectedColumn);
+            }
 
             var restaurants = baseQuery
                 .Skip(query.PageSize * (query.PageNumber - 1))
@@ -81,7 +101,7 @@ namespace RestaurantAPI.Services
             _logger.LogError($"Restaurant with id: {Guid.Parse(id)} DELETE action invoked");
             var restaurant = _dbContext
                 .Restaurants
-                .FirstOrDefault(x=>x.Id==Guid.Parse(id));
+                .FirstOrDefault(x => x.Id == Guid.Parse(id));
 
             if (restaurant is null)
                 throw new NotFoundException("Restaurant not found");

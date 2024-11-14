@@ -1,6 +1,6 @@
 ﻿using RestaurantAPI.Models;
 
-namespace RestaurantAPI
+namespace RestaurantAPI.Services.UserFolder
 {
     public interface IUserService
     {

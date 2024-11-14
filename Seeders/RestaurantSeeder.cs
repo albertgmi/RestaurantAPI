@@ -3,7 +3,7 @@ using RestaurantAPI.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RestaurantAPI
+namespace RestaurantAPI.Seeders
 {
     public class RestaurantSeeder : IRestaurantSeeder
     {
@@ -86,7 +86,7 @@ namespace RestaurantAPI
                     Name = faker.Commerce.Product(),
                     Description = faker.Commerce.ProductDescription(),
                     Price = Convert.ToDecimal(faker.Commerce.Price()),
-                    RestaurantId = restaurants[faker.Random.Int(0, restaurants.Count-1)].Id
+                    RestaurantId = restaurants[faker.Random.Int(0, restaurants.Count - 1)].Id
                 });
             }
             return dishes;

@@ -1,7 +1,7 @@
 ﻿using RestaurantAPI.Models;
 using System.Security.Claims;
 
-namespace RestaurantAPI.Services
+namespace RestaurantAPI.Services.Restaurant
 {
     public interface IRestaurantService
     {

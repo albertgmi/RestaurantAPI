@@ -5,12 +5,13 @@ using Microsoft.IdentityModel.Tokens;
 using RestaurantAPI.Entities;
 using RestaurantAPI.Exceptions;
 using RestaurantAPI.Models;
+using RestaurantAPI.Services.Dish;
 using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 
-namespace RestaurantAPI.Services
+namespace RestaurantAPI.Services.UserFolder
 {
     public class UserService : IUserService
     {
@@ -48,7 +49,7 @@ namespace RestaurantAPI.Services
         {
             var user = _context
                 .Users
-                .Include(x=>x.Role)
+                .Include(x => x.Role)
                 .FirstOrDefault(x => x.Email == loginDto.Email);
             if (user is null)
                 throw new BadRequestException("Invalid username or password");

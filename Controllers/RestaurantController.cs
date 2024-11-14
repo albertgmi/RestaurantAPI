@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantAPI.Entities;
 using RestaurantAPI.Models;
-using RestaurantAPI.Services;
+using RestaurantAPI.Services.Restaurant;
 using System.Security.Claims;
 
 namespace RestaurantAPI.Controllers
