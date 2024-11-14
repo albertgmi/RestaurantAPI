@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using RestaurantAPI.Entities;
 using RestaurantAPI.Exceptions;
 using RestaurantAPI.Models;
-using RestaurantAPI.Services.Dish;
+using RestaurantAPI.Services.DishServiceFolder;
 using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;

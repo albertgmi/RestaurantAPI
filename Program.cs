@@ -17,10 +17,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using RestaurantAPI.Authorization;
 using Microsoft.AspNetCore.Authorization;
-using RestaurantAPI.Services.Restaurant;
-using RestaurantAPI.Services.Dish;
 using RestaurantAPI.Services.UserFolder;
 using RestaurantAPI.Seeders;
+using RestaurantAPI.Services.RestaurantServiceFolder;
+using RestaurantAPI.Services.DishServiceFolder;
 
 var builder = WebApplication.CreateBuilder(args);
 

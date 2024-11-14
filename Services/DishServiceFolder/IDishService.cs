@@ -1,7 +1,7 @@
 ﻿using RestaurantAPI.Entities;
 using RestaurantAPI.Models;
 
-namespace RestaurantAPI.Services.Dish
+namespace RestaurantAPI.Services.DishServiceFolder
 {
     public interface IDishService
     {

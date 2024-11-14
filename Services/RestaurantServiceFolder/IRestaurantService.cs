@@ -1,7 +1,7 @@
 ﻿using RestaurantAPI.Models;
 using System.Security.Claims;
 
-namespace RestaurantAPI.Services.Restaurant
+namespace RestaurantAPI.Services.RestaurantServiceFolder
 {
     public interface IRestaurantService
     {

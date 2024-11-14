@@ -8,11 +8,10 @@ using RestaurantAPI.Entities;
 using RestaurantAPI.Exceptions;
 using RestaurantAPI.Models;
 using RestaurantAPI.Services.UserFolder;
-using RestaurantAPI.Services.Restaurant;
 using System.Linq.Expressions;
 using System.Security.Claims;
 
-namespace RestaurantAPI.Services.Restaurant
+namespace RestaurantAPI.Services.RestaurantServiceFolder
 {
     public class RestaurantService : IRestaurantService
     {

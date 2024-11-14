@@ -5,7 +5,7 @@ using RestaurantAPI.Exceptions;
 using RestaurantAPI.Models;
 using System.Collections.Specialized;
 
-namespace RestaurantAPI.Services.Dish
+namespace RestaurantAPI.Services.DishServiceFolder
 {
     public class DishService : IDishService
     {

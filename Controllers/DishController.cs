@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantAPI.Models;
-using RestaurantAPI.Services.Dish;
+using RestaurantAPI.Services.DishServiceFolder;
 
 namespace RestaurantAPI.Controllers
 {
