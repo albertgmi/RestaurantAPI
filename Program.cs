@@ -18,6 +18,8 @@ using RestaurantAPI.Services.UserFolder;
 using RestaurantAPI.Seeders;
 using RestaurantAPI.Services.RestaurantServiceFolder;
 using RestaurantAPI.Services.DishServiceFolder;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,9 +91,10 @@ builder.Services.AddTransient<IRestaurantSeeder, RestaurantSeeder>();
 
 var app = builder.Build();
 
+app.UseResponseCaching();
 app.UseStaticFiles();
-
 app.UseCors("FrontendClient");
+
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<TimeRequestMiddleware>();
 
