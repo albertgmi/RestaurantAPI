@@ -68,11 +68,25 @@ dotnet restore
 The application includes an automatic seeder that will populate the database with sample data when the application starts.
 Ensure the database connection is correctly configured in the appsettings.Developement.json file
 
+### **Install the dotnet-ef tool**
+
+If the dotnet-ef tool is not installed, use the following command to install it globally:
+
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+### **Run the migration command to update the SQL server**
+
+```bash
+dotnet ef database update
+```
+
 ### **Run the application:**
 
 ```bash
 dotnet run
 ```
-### **Access the API via Swagger at:**
-
+### **Access the API via Swagger at your localhost port:**
+For instance:
 http://localhost:5176/swagger/index.html
