@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RestaurantAPI.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestaurantAPI.Models
 {
@@ -9,6 +10,6 @@ namespace RestaurantAPI.Models
         public string ConfirmPassword { get; set; }
         public string Nationality { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public Guid RoleId { get; set; } = Guid.Parse("EA94D7FA-8E6F-4F08-D952-08DD004F5278");
+        public int RoleId { get; set; } = 1;
     }
 }

@@ -9,7 +9,7 @@
         public DateTime? DateOfBirth { get; set; }
         public string Nationality { get; set; }
         public string PasswordHash { get; set; }
-        public Guid RoleId { get; set; }
+        public int RoleId { get; set; }
         public Role Role { get; set; }
     }
 }
