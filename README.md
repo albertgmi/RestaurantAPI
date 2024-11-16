@@ -75,4 +75,4 @@ dotnet run
 ```
 ### **Access the API via Swagger at:**
 
-http://localhost:5000/swagger
+http://localhost:5176/swagger/index.html
