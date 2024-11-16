@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
 using RestaurantAPI.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,22 @@ namespace RestaurantAPI.Seeders
 
         public void Seed(RestaurantDbContext dbContext)
         {
-            if (!dbContext.Roles.Any())
-            {
-                var roles = CreateRoles();
-                dbContext.Roles.AddRange(roles);
-                dbContext.SaveChanges();
-            }
-            if (dbContext.Dishes.Any())
-                return;
-
+            
             if (dbContext.Database.CanConnect())
             {
+                var pendingMigrations = dbContext.Database.GetPendingMigrations();
+                if (pendingMigrations != null && pendingMigrations.Any())
+                {
+                    dbContext.Database.Migrate();
+                }
+                if (dbContext.Dishes.Any())
+                    return;
+                if (!dbContext.Roles.Any())
+                {
+                    var roles = CreateRoles();
+                    dbContext.Roles.AddRange(roles);
+                    dbContext.SaveChanges();
+                }
                 var addresses = CreateAddresses();
                 dbContext.Addresses.AddRange(addresses);
                 dbContext.SaveChanges();
