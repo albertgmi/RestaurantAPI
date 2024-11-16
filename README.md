@@ -66,7 +66,7 @@ dotnet restore
 ### **Configure the database connection:**
 
 The application includes an automatic seeder that will populate the database with sample data when the application starts.
-Ensure the database connection is correctly configured in the appsettings.json file
+Ensure the database connection is correctly configured in the appsettings.Developement.json file
 
 ### **Run the application:**
 
