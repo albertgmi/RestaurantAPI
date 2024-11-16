@@ -3,6 +3,8 @@
 The **RestaurantAPI** project is a RESTful API built with **.NET 6**, designed to provide backend solutions for restaurant management.  
 It includes features such as user authentication, static file handling, and CRUD (Create, Read, Update, Delete) operations, tailored for managing restaurant data.
 
+---
+
 ## Features
 
 ### **User Authentication**  
@@ -17,9 +19,18 @@ Supports the full range of operations for managing restaurant data, such as menu
 ### **Static File Handling**  
 The API can manage static files like images, PDFs, etc.
 
-### **Automatic Database Seeder**
+### **Pagination**  
+The API supports pagination for data-heavy endpoints, providing:
+- **Total Pages**: The number of pages available (configurable).
+- **Results Per Page**: The number of items displayed per page (configurable).
+- **Total Items**: The total count of elements in the database.
+- **Sorting**: Data can be sorted by various attributes like name, date, etc.
+- **Filtering**: Results can be narrowed down by applying specific filters (e.g., by cuisine type, rating, location).
 
+### **Automatic Database Seeder**  
 The application includes an automatic seeder that populates the database with sample data when the application starts, providing a ready-to-use environment for testing.
+
+---
 
 ## Architecture & Design
 
@@ -31,6 +42,8 @@ Data Transfer Objects (DTOs) are used for efficient data representation between 
 
 ### **Fluent Validation**  
 Ensures validation rules are applied consistently and declaratively across requests.
+
+---
 
 ## Technologies
 
